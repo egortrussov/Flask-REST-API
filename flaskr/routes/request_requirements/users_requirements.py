@@ -20,7 +20,7 @@ ASSIGNED_ORDERS_ARGS = [
     }
 ]
 
-GET_AVAILABLE_WORKERS_DATA = [
+GET_AVAILABLE_WORKERS_ARGS = [
     {
         'name': 'time_start',
         'optional': False,

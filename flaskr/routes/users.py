@@ -2,13 +2,13 @@ from flask import Blueprint, request
 from datetime import datetime
 
 from ..middleware.token_validation import token_required 
-from ..middleware.request_validation import request_args_required, form_data_required
+from ..middleware.request_validation import request_args_required 
 from ..middleware.datetime_middleware import check_intersection, str_to_datetime_data
 
 from ..db.db import create_session 
 from ..models.User import User 
 
-from .request_requirements.users_requirements import CREATED_ORDERS_ARGS, USER_DATA_ARGS, ASSIGNED_ORDERS_ARGS, GET_AVAILABLE_WORKERS_DATA, WORKER_GRADES_ARGS
+from .request_requirements.users_requirements import CREATED_ORDERS_ARGS, USER_DATA_ARGS, ASSIGNED_ORDERS_ARGS, GET_AVAILABLE_WORKERS_ARGS, WORKER_GRADES_ARGS
 
 bp = Blueprint('users', __name__, url_prefix='/api/users')
 
@@ -66,13 +66,13 @@ def assigned_orders(decoded_token=None):
     }
 
 @bp.route('/availableWorkers', methods=['GET', ]) 
-@form_data_required(GET_AVAILABLE_WORKERS_DATA)
+@request_args_required(GET_AVAILABLE_WORKERS_ARGS)
 def get_available_workers():
     session = create_session() 
 
     timestamp = (
-        datetime(**str_to_datetime_data(request.form['time_start'])), 
-        datetime(**str_to_datetime_data(request.form['time_finish']))
+        datetime(**str_to_datetime_data(request.args['time_start'])), 
+        datetime(**str_to_datetime_data(request.args['time_finish']))
     )
     available_workers = []
 

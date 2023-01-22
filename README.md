@@ -68,7 +68,7 @@ Response:
 ### 5. GET ` /api/users/availableWorkers/`
 Finds and returns a list of workers that do not have assigned orders, the time limits of which intersect with timestamps given in request form data <br/>
 
-Request form data: 
+Request args: 
 - time_start: date
 - time_finish: date
 
